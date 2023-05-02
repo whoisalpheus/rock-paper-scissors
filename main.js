@@ -28,12 +28,11 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// Playerselection input
-const playerSelection = prompt('Choose', 'Rock, Paper, Scissors').toLowerCase();
-
 // Play 5 rounds
 function game() {
     for (let i = 0; i < 5; i++) {
+        // Playerselection input
+        const playerSelection = prompt('Choose', 'Rock, Paper, Scissors').toLowerCase();
         const computerSelection = getComputerChoice();
         playRound(playerSelection, computerSelection);
     }
