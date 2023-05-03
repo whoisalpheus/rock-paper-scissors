@@ -17,14 +17,14 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === 'paper' && computerSelection === 'rock') ||
         (playerSelection === 'scissors' && computerSelection === 'paper')) {
             return 'You win!';
-            playerScore++;
+            // playerScore++;
     } else if (
         (playerSelection === 'rock' && computerSelection === 'paper') || 
         (playerSelection === 'paper' && computerSelection === 'scissors') ||
         (playerSelection === 'scissors' && computerSelection === 'rock'))
         {
             return 'You lose!';
-            compScore++;
+            // compScore++;
     }
 }
 
@@ -36,13 +36,19 @@ function game() {
         const computerSelection = getComputerChoice();
         playRound(playerSelection, computerSelection);
     }
+} console.log(game());
 
+function scoreCount() {
     // Tally up score
-    if (playerScore > compScore) {
+    // Need to tie this with playRound()
+    const tally = playRound(); 
+    if (tally == 'You win!') {
+        playerScore++;
         return 'You beat the computer!';
-    } else if (playerScore < compScore) {
+    } else if (tally == 'You lose!') {
+        compScore++;
         return 'The computer beat you, dude!';
     } else {
         return 'It is a tie with the computer.';
     }
-} console.log(game());
+} scoreCount();
