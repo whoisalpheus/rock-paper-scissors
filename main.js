@@ -6,7 +6,7 @@ function getComputerChoice() {
     const choice = ['rock', 'paper', 'scissors'];
     const randomNum = Math.floor(Math.random() * choice.length)
     return choice[randomNum];
-}
+} console.log(getComputerChoice());
 
 // Result of each match up: rock vs paper, scissor vs rock, etc
 function playRound(playerSelection, computerSelection) {
@@ -16,17 +16,19 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === 'rock' && computerSelection === 'scissors') || 
         (playerSelection === 'paper' && computerSelection === 'rock') ||
         (playerSelection === 'scissors' && computerSelection === 'paper')) {
+            playerScore++;
             return 'You win!';
-            // playerScore++;
+            
     } else if (
         (playerSelection === 'rock' && computerSelection === 'paper') || 
         (playerSelection === 'paper' && computerSelection === 'scissors') ||
         (playerSelection === 'scissors' && computerSelection === 'rock'))
         {
+            compScore++;
             return 'You lose!';
-            // compScore++;
+            
     }
-}
+} console.log(playRound());
 
 // Play 5 rounds
 function game() {
@@ -36,19 +38,14 @@ function game() {
         const computerSelection = getComputerChoice();
         playRound(playerSelection, computerSelection);
     }
-} console.log(game());
-
-function scoreCount() {
-    // Tally up score
-    // Need to tie this with playRound()
-    const tally = playRound(); 
-    if (tally == 'You win!') {
-        playerScore++;
+    
+    if (playerScore > compScore) {
+        // playerScore++;
         return 'You beat the computer!';
-    } else if (tally == 'You lose!') {
-        compScore++;
+    } else if (playerScore < compScore) {
+        // compScore++;
         return 'The computer beat you, dude!';
     } else {
         return 'It is a tie with the computer.';
     }
-} scoreCount();
+} console.log(game());
