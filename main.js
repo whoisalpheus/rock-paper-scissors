@@ -73,9 +73,13 @@ scissorsButton.setAttribute('id', 'scissorsBtn');
 scissorsButton.classList.add('btn');
 container.appendChild(scissorsButton);
 
-// Eventlistener
-btn.addEventListener('click', () => {
-    playRound();
-});
+const btn = document.querySelectorAll('button');
 
-const playerSelection = document.querySelector('.btn');
+// Eventlisteners
+btn.forEach((button) => {
+    button.addEventListener('click', () => {
+        let playerSelection = button.id;
+        let computerSelection = getComputerChoice();
+        console.log(playRound(playerSelection, computerSelection));
+    });
+});
