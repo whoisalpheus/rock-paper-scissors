@@ -1,5 +1,8 @@
-let playerScore = 0;
-let compScore = 0;
+// let playerScore = 0;
+// let compScore = 0;
+const buttons = document.querySelectorAll('button');
+const container = document.querySelector('#container');
+const resultsDiv = document.querySelector('#results');
 
 // Computer selection of rock, paper, scissor
 function getComputerChoice() {
@@ -11,22 +14,25 @@ function getComputerChoice() {
 // Result of each match up: rock vs paper, scissor vs rock, etc
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return 'It is a tie!';
+        const p = document.createElement('p');
+        p.innerText = 'It is a tie!';
+        resultsDiv.appendChild(p);
+
     } else if (
         (playerSelection === 'rock' && computerSelection === 'scissors') || 
         (playerSelection === 'paper' && computerSelection === 'rock') ||
         (playerSelection === 'scissors' && computerSelection === 'paper')) {
-            playerScore++;
-            return 'You win!';
-            
+            // playerScore++;
+            p.innerText = 'You win!';
+            resultsDiv.appendChild(p);
     } else if (
         (playerSelection === 'rock' && computerSelection === 'paper') || 
         (playerSelection === 'paper' && computerSelection === 'scissors') ||
         (playerSelection === 'scissors' && computerSelection === 'rock'))
         {
-            compScore++;
-            return 'You lose!';
-            
+            // compScore++;
+            p.innerText = 'You lose!';
+            resultsDiv.appendChild(p);
     }
 }
 
@@ -53,33 +59,51 @@ function playRound(playerSelection, computerSelection) {
 // UI
 
 // Create three buttons for Rock, Paper, Scissors
-const container = document.querySelector('#container');
 
+
+// Add a div for displaying results
+// const results = document.createElement('div');
+// results.setAttribute('id', 'results');
+// container.appendChild(results);
+
+// Buttons
 const rockButton = document.createElement('button');
 rockButton.textContent = 'Rock';
 rockButton.setAttribute('id', 'rockBtn');
-rockButton.classList.add('btn');
+// rockButton.classList.add('btn');
 container.appendChild(rockButton);
 
 const paperButton = document.createElement('button');
 paperButton.textContent = 'Paper';
 paperButton.setAttribute('id', 'paperBtn');
-paperButton.classList.add('btn');
+// paperButton.classList.add('btn');
 container.appendChild(paperButton);
 
 const scissorsButton = document.createElement('button');
 scissorsButton.textContent = 'Scissors';
 scissorsButton.setAttribute('id', 'scissorsBtn');
-scissorsButton.classList.add('btn');
+// scissorsButton.classList.add('btn');
 container.appendChild(scissorsButton);
 
-const btn = document.querySelectorAll('button');
+// let computerSelection = getComputerChoice();
+// let playerSelection = button.id;
 
 // Eventlisteners
-btn.forEach((button) => {
+
+buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        let playerSelection = button.id;
-        let computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
+        const computerSelection = getComputerChoice();
+        const playerSelection = button.id;
+        playRound(playerSelection, computerSelection);
     });
 });
+
+// btn.forEach((button) => {
+//     button.addEventListener('click', playRound(playerSelection, computerSelection) => {
+//         let playerSelection = button.id;
+//         // let computerSelection = getComputerChoice();
+//         // console.log(playRound(playerSelection, computerSelection));
+//     });
+// });
+
+// console.log(btn.forEach(button => button.addEventListener('click', playRound)));
