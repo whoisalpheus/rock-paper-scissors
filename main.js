@@ -1,5 +1,5 @@
-// let playerScore = 0;
-// let compScore = 0;
+let playerScore = 0;
+let compScore = 0;
 const buttons = document.querySelectorAll('button');
 const container = document.querySelector('#container');
 const resultsDiv = document.querySelector('#results');
@@ -11,8 +11,16 @@ function getComputerChoice() {
     return choice[randomNum];
 }
 
+
+function playRound(e) {
+    const computerSelection = getComputerChoice();
+    const playerSelection = e.target.id;
+    const winner = getWinner(playerSelection, computerSelection);
+    // tallyWinner(winner, computerSelection);
+}
+
 // Result of each match up: rock vs paper, scissor vs rock, etc
-function playRound(playerSelection, computerSelection) {
+function getWinner(playerSelection, computerSelection) {
     if (playerSelection == computerSelection) {
         const p = document.createElement('p');
         p.innerText = 'It is a tie!';
@@ -22,7 +30,7 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection == 'Rock' && computerSelection == 'Scissors') || 
         (playerSelection == 'Paper' && computerSelection == 'Rock') ||
         (playerSelection == 'Scissors' && computerSelection == 'Paper')) {
-            // playerScore++;
+            playerScore++;
             const p = document.createElement('p');
             p.innerText = 'You win!';
             resultsDiv.appendChild(p);
@@ -32,12 +40,22 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection == 'Paper' && computerSelection == 'Scissors') ||
         (playerSelection == 'Scissors' && computerSelection == 'Rock'))
     {
-            // compScore++;
+            compScore++;
             const p = document.createElement('p');
             p.innerText = 'You lose!';
             resultsDiv.appendChild(p);
     }
 }
+
+// tallyWinner(winner, computerSelection) { 
+//     if (playerScore > compScore) {
+//         return 'You beat the computer!';
+//     } else if (playerScore < compScore) {
+//         return 'The computer beat you, dude!';
+//     } else {
+//         return 'It is a tie with the computer.';
+//     }    
+// }
 
 // UI
 
@@ -61,14 +79,19 @@ container.appendChild(scissorsButton);
 
 // Eventlisteners
 
-buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-        const computerSelection = getComputerChoice();
-        const playerSelection = button.id;
-        playRound(playerSelection, computerSelection);
-    }); 
-});
+// playGame() {
+//     buttons.forEach((button) => 
+//         button.addEventListener('click', () => {
+//             const computerSelection = getComputerChoice();
+//             const playerSelection = button.id;
+//             playRound(playerSelection, computerSelection);
+//         }) 
+//     )
+// } 
+// playGame();
 
+
+buttons.forEach(button => button.addEventListener('click', playRound));
 
 
 
