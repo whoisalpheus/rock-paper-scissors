@@ -1,64 +1,69 @@
-
-const buttons = document.querySelectorAll('button');
 const container = document.querySelector('#container');
-const resultsDiv = document.querySelector('#results');
-const compPick = document.querySelector('#comp-pick');
-const scoreBoard = document.querySelector('#score');
-const scoreResult = {
-    playerScore: 0,
-    compScore: 0
-    
-};
+const btnContainer = document.querySelector('#btnContainer');
+const buttons = document.querySelectorAll('.btnChoice');
+const player = document.querySelector('#playerChoice');
+const computer = document.querySelector('#compChoice');
+const winner = document.querySelector('#whoWon');
+const result = document.querySelector('#finalResult');
+const scoreBoard = document.querySelector('#scoreContainer');
+const scoreLabel = document.querySelectorAll('.scoreLabel');
+const playerResult = document.querySelector('#playerResult');
+const compResult = document.querySelector('#compResult');
+let playerSelection;
+let computerSelection;
+let playerScore = 0;
+let compScore = 0;
 
-// Outcomes:
-const p = document.createElement('p');
-const pComp = document.createElement('p');
-const score = document.createElement('h3');
-
+// Press button result
+buttons.forEach(button => button.addEventListener('click', (e) => {
+    // Player choice:
+    playerSelection = e.target.textContent;
+    player.textContent = `You chose: ${playerSelection}.`;
+    // Computer choice:
+    computerSelection = getComputerChoice();
+    computer.textContent = `Computer chose: ${computerSelection}.`;
+    // Results of who won/draw:
+    winner.textContent = `${whoWon()}`;
+    // Final result of game
+    result.textContent = tallyWinner();
+    scoreDisplay();
+}))
 
 // Computer selection of rock, paper, scissor
 function getComputerChoice() {
-    const choice = ['rock', 'paper', 'scissors'];
-    const randomNum = Math.floor(Math.random() * choice.length)
-    pComp.innerText = `Computer chose ${choice[randomNum]}!`;
-    compPick.appendChild(pComp);
-    return choice[randomNum];
+    const choice = ['Rock', 'Paper', 'Scissors'];
+    const randNum = Math.floor(Math.random() * choice.length);
+    return choice[randNum];
 }
 
-const winner = getWinner();
-
-function pressButton(e) {
-    const playerSelection = e.target.id;
-    const computerSelection = getComputerChoice();
-    getWinner(playerSelection, computerSelection);
-    tallyWinner(winner, computerSelection);
-}
 
 // This compares playerSelection and computerSelection
 // Result of each match up: rock vs paper, scissor vs rock, etc
-function getWinner(playerSelection, computerSelection) {
+function whoWon() {
     if (
-        (playerSelection === 'rock' && computerSelection === 'scissors') || 
-        (playerSelection === 'paper' && computerSelection === 'rock') ||
-        (playerSelection === 'scissors' && computerSelection === 'paper')) {
-            // playerScore++;
-            p.innerText = 'You win!';
-            resultsDiv.appendChild(p);
-            return 'player';
+        (playerSelection === 'Rock' && computerSelection === 'Scissors') || 
+        (playerSelection === 'Paper' && computerSelection === 'Rock') ||
+        (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
+            playerScore++;
+            return `You beat the computer! ${playerSelection} defeats ${computerSelection}.`;
     } else if (
-        (playerSelection === 'rock' && computerSelection === 'paper') || 
-        (playerSelection === 'paper' && computerSelection === 'scissors') ||
-        (playerSelection === 'scissors' && computerSelection === 'rock')) 
-        {
-            // compScore++;
-            p.innerText = 'You lose!';
-            resultsDiv.appendChild(p);
-            return 'computer';
+        (playerSelection === 'Rock' && computerSelection === 'Paper') || 
+        (playerSelection === 'Paper' && computerSelection === 'Scissors') ||
+        (playerSelection === 'Scissors' && computerSelection === 'Rock')) {
+            compScore++;
+            return `The computer beat you! ${computerSelection} defeats ${playerSelection}.`;
     } else {
-        p.innerText = 'It is a tie!';
-        resultsDiv.appendChild(p);
+            return "It's a tie!";
     }
-} 
+}
+
+function tallyWinner() {
+    if (playerScore == 5) {
+        return 'You won the game! You reached 5 before the computer! Congrats!!!';
+    } else if (compScore == 5) {
+        return 'You lost the game! The computer reached 5 before you! Better luck next time.';
+    }
+}
 
 // UI
 
@@ -68,67 +73,44 @@ function getWinner(playerSelection, computerSelection) {
 // Rock
 const rockButton = document.createElement('button');
 rockButton.textContent = 'Rock';
+rockButton.classList.add('btnChoice');
 rockButton.setAttribute('id', 'rock');
-container.appendChild(rockButton);
+btnContainer.appendChild(rockButton);
 
 // Paper
 const paperButton = document.createElement('button');
 paperButton.textContent = 'Paper';
+paperButton.classList.add('btnChoice');
 paperButton.setAttribute('id', 'paper');
-container.appendChild(paperButton);
+btnContainer.appendChild(paperButton);
 
 // Scissors
 const scissorsButton = document.createElement('button');
 scissorsButton.textContent = 'Scissors';
+scissorsButton.classList.add('btnChoice');
 scissorsButton.setAttribute('id', 'scissors');
-container.appendChild(scissorsButton);
+btnContainer.appendChild(scissorsButton);
 
 // Eventlisteners
 
-rockButton.addEventListener('click', pressButton);
-paperButton.addEventListener('click', pressButton);
-scissorsButton.addEventListener('click', pressButton);
+// rockButton.addEventListener('click', pressButton);
+// paperButton.addEventListener('click', pressButton);
+// scissorsButton.addEventListener('click', pressButton);
 
-// How do I use forEach() instead???
-
-// buttons.forEach(button => button.addEventListener('click', playRound));
 
 // // This displays who wins each round
 
+function scoreDisplay() {
+    document.getElementById('playerResult').value = playerScore;
+    document.getElementById('compResult').value = compScore;
+}
 
-
-function tallyWinner(winner, computerSelection) { 
-    if (winner == 'player') {
-        scoreResult.playerScore++;
-        score.innerText = `Player: ${playerScore}\n Computer: ${compScore}`;
-        scoreBoard.appendChild(score); 
-    } else if (winner == 'computer') {
-        scoreResult.compScore++;
-        score.innerText = `Player: ${playerScore}\n Computer: ${compScore}`;
-        scoreBoard.appendChild(score);
-    } 
-}      
-
-// Display Score
-// function displayScore() {
-//     tallyWinner();
-//     score.innerText = `Player: ${playerScore}\n Computer: ${compScore}`;
-//     scoreBoard.appendChild(score);
-// } displayScore();
+// Return to 0...start game over after scoring 5:     
 
 
 
 
-// playGame() {
-//     buttons.forEach((button) => 
-//         button.addEventListener('click', () => {
-//             const computerSelection = getComputerChoice();
-//             const playerSelection = button.id;
-//             playRound(playerSelection, computerSelection);
-//         }) 
-//     )
-// } 
-// playGame();
+
 
 
 
