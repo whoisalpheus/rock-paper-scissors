@@ -8,11 +8,17 @@
 </head>
 <body>
     <div id="container">
-        <div id="btnContainer"></div>
-        <h1 id="playerText">You chose: </h1>
-        <h1 id="computerText">Computer chose: </h1>
-        <h1 id="resultsText">Result: </h1>
-        <h1 id="scoreText">Score: </h1>
+        <!-- <div id="btnContainer"></div> -->
+        <h1 id="playerChoice">You chose: </h1>
+        <h1 id="compChoice">Computer chose: </h1>
+        <h1 id="whoWon">Result: </h1>
+        <h1 id="finalResult">Score: </h1>
+    </div>
+    <div id="scoreContainer">
+        <label for="playerResult" class="scoreLabel">Player Result: </label>
+        <input type="text" name="playerResult" id="playerResult" class="scoreBox">
+        <label for="compResult" class="scoreLabel">Computer Result: </label>
+        <input type="text" name="compResult" id="compResult" class="scoreBox">
     </div>
 
     <script src="main.js"></script>

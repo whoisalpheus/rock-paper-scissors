@@ -1,5 +1,5 @@
 const container = document.querySelector('#container');
-const btnContainer = document.querySelector('#btnContainer');
+// const btnContainer = document.querySelector('#btnContainer');
 const buttons = document.querySelectorAll('.btnChoice');
 const player = document.querySelector('#playerChoice');
 const computer = document.querySelector('#compChoice');
@@ -13,6 +13,32 @@ let playerSelection;
 let computerSelection;
 let playerScore = 0;
 let compScore = 0;
+
+// UI
+
+// Create three buttons for rock, paper, scissors
+
+// Buttons
+// Rock
+const rockButton = document.createElement('button');
+rockButton.textContent = 'Rock';
+rockButton.classList.add('btnChoice');
+rockButton.setAttribute('id', 'rock');
+container.appendChild(rockButton);
+
+// Paper
+const paperButton = document.createElement('button');
+paperButton.textContent = 'Paper';
+paperButton.classList.add('btnChoice');
+paperButton.setAttribute('id', 'paper');
+container.appendChild(paperButton);
+
+// Scissors
+const scissorsButton = document.createElement('button');
+scissorsButton.textContent = 'Scissors';
+scissorsButton.classList.add('btnChoice');
+scissorsButton.setAttribute('id', 'scissors');
+container.appendChild(scissorsButton);
 
 // Press button result
 buttons.forEach(button => button.addEventListener('click', (e) => {
@@ -65,31 +91,6 @@ function tallyWinner() {
     }
 }
 
-// UI
-
-// Create three buttons for rock, paper, scissors
-
-// Buttons
-// Rock
-const rockButton = document.createElement('button');
-rockButton.textContent = 'Rock';
-rockButton.classList.add('btnChoice');
-rockButton.setAttribute('id', 'rock');
-btnContainer.appendChild(rockButton);
-
-// Paper
-const paperButton = document.createElement('button');
-paperButton.textContent = 'Paper';
-paperButton.classList.add('btnChoice');
-paperButton.setAttribute('id', 'paper');
-btnContainer.appendChild(paperButton);
-
-// Scissors
-const scissorsButton = document.createElement('button');
-scissorsButton.textContent = 'Scissors';
-scissorsButton.classList.add('btnChoice');
-scissorsButton.setAttribute('id', 'scissors');
-btnContainer.appendChild(scissorsButton);
 
 // Eventlisteners
 
