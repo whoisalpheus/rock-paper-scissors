@@ -1,18 +1,4 @@
 const container = document.querySelector('#container');
-// const btnContainer = document.querySelector('#btnContainer');
-const buttons = document.querySelectorAll('.btnChoice');
-const player = document.querySelector('#playerChoice');
-const computer = document.querySelector('#compChoice');
-const winner = document.querySelector('#whoWon');
-const result = document.querySelector('#finalResult');
-const scoreBoard = document.querySelector('#scoreContainer');
-const scoreLabel = document.querySelectorAll('.scoreLabel');
-const playerResult = document.querySelector('#playerResult');
-const compResult = document.querySelector('#compResult');
-let playerSelection;
-let computerSelection;
-let playerScore = 0;
-let compScore = 0;
 
 // UI
 
@@ -39,6 +25,22 @@ scissorsButton.textContent = 'Scissors';
 scissorsButton.classList.add('btnChoice');
 scissorsButton.setAttribute('id', 'scissors');
 container.appendChild(scissorsButton);
+
+
+// const btnContainer = document.querySelector('#btnContainer');
+const buttons = document.querySelectorAll('.btnChoice');
+const player = document.querySelector('#playerChoice');
+const computer = document.querySelector('#compChoice');
+const winner = document.querySelector('#whoWon');
+const result = document.querySelector('#finalResult');
+const scoreBoard = document.querySelector('#scoreContainer');
+const scoreLabel = document.querySelectorAll('.scoreLabel');
+const playerResult = document.querySelector('#playerResult');
+const compResult = document.querySelector('#compResult');
+let playerSelection;
+let computerSelection;
+let playerScore = 0;
+let compScore = 0;
 
 // Press button result
 buttons.forEach(button => button.addEventListener('click', (e) => {
